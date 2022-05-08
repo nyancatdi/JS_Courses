@@ -16,8 +16,11 @@ exports.config = {
       show: true,
       browser: 'chromium',
       waitForNavigation: 'networkidle0',
-      waitForTimeout: 10000,
-      timeout: 10000,
+      waitForTimeout: 40000,
+      timeout: 40000,
+    },
+    ChaiWrapper : {
+      require: "codeceptjs-chai"
     },
     Generator: {
       require: './generator_helper.js',
@@ -30,6 +33,9 @@ exports.config = {
     createAccountPage: './pages/createAccount.js',
     myAccountPage: './pages/myAccount.js',
     userData: './data/user.js',
+    womenShopPage: './pages/womenShop.js',
+    productCardPage: './pages/productCard.js',
+    summaryPage: './pages/summary.js',
   },
   bootstrap: null,
   mocha: {},

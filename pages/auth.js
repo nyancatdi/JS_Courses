@@ -1,20 +1,36 @@
 const { I } = inject();
 
 module.exports = {
-  newUserEmailImput: { css: '#email_create' },
+  newUserEmailInput: { css: '#email_create' },
   createAccountButton: { css: '#SubmitCreate' },
+  loginEmailInput: { css: '#email' },
+  loginPassInput: { css: '#passwd' },
+  signInButton: { css: '#SubmitLogin' },
 
-  waitForPageLoad() {
-    I.waitForVisible(this.newUserEmailImput);
+  waitForRegisterLoad() {
+    I.waitForVisible(this.newUserEmailInput);
   },
 
+  waitForSignInLoad() {
+    I.waitForVisible(this.loginEmailInput);
+  },
 
   fillNewUserEmail(email) {
-    this.waitForPageLoad();
-    I.fillField(this.newUserEmailImput, email);
+    this.waitForRegisterLoad();
+    I.fillField(this.newUserEmailInput, email);
   },
 
   clickCreateAccount() {
     I.click(this.createAccountButton);
+  },
+
+  fillLoginForm(email, pass) {
+    this.waitForSignInLoad();
+    I.fillField(this.loginEmailInput, email);
+    I.fillField(this.loginPassInput, pass);
+  },
+
+  clickSignIn() {
+    I.click(this.signInButton);
   }
 }
