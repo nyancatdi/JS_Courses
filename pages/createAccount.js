@@ -49,7 +49,6 @@ module.exports = {
   waitForPageLoad() {
     I.waitForVisible(this.customerFirstNameInput);
   },
-
   clickRegisterAccount() {
     I.click(this.registerAccountButton);
   }
