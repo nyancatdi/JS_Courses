@@ -60,7 +60,6 @@ module.exports = {
   },
 
   checkConfirmPage() {
-    // I.waitForVisible('Your order on My Store is complete.');
     I.see('Your order on My Store is complete.');
   }
 }

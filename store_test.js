@@ -1,3 +1,5 @@
+const FileHandler = require("./helpers/file_handler");
+
 Feature('Store');
 
 Before(({ I, homePage }) => {
@@ -12,7 +14,7 @@ Scenario('registration test', ({ I, homePage, authPage, createAccountPage, myAcc
     createAccountPage.fillNewUserForm(userData);
     createAccountPage.clickRegisterAccount();
     myAccountPage.checkAccountPage();
-});
+}).tag('@reg');
 
 Scenario('order test', async ({ I, userData, homePage, authPage, myAccountPage, womenShopPage, productCardPage, summaryPage }) => {
     homePage.clickSignIn();
@@ -36,4 +38,8 @@ Scenario('order test', async ({ I, userData, homePage, authPage, myAccountPage, 
     summaryPage.clickPaymentButton();
     summaryPage.clickConfirmOrderButton();
     summaryPage.checkConfirmPage();
-});
+}).tag('@order');
+
+Data(FileHandler.getData()).Scenario('Users from data', ({ current }) => {
+    console.log('Email: ' + current.email + '\nPassword: ' + current.password);
+}).tag('@account');

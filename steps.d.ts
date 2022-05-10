@@ -9,7 +9,7 @@ type womenShopPage = typeof import('./pages/womenShop.js');
 type productCardPage = typeof import('./pages/productCard.js');
 type summaryPage = typeof import('./pages/summary.js');
 type ChaiWrapper = import('codeceptjs-chai');
-type Generator = import('./generator_helper.js');
+type Generator = import('./helpers/generator_helper.js');
 
 declare namespace CodeceptJS {
   interface SupportObject { I: I, current: any, homePage: homePage, authPage: authPage, createAccountPage: createAccountPage, myAccountPage: myAccountPage, userData: userData, womenShopPage: womenShopPage, productCardPage: productCardPage, summaryPage: summaryPage }

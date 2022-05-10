@@ -23,7 +23,7 @@ exports.config = {
       require: "codeceptjs-chai"
     },
     Generator: {
-      require: './generator_helper.js',
+      require: './helpers/generator_helper.js',
     }
   },
   include: {
