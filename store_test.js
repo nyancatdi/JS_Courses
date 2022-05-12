@@ -2,12 +2,12 @@ const FileHandler = require("./helpers/file_handler");
 
 Feature('Store');
 
-Before(({ I, homePage }) => {
-    homePage.openStore();
-});
+// Before(({ I, homePage }) => {
+//     homePage.openStore();
+// });
 
-Scenario('registration test', ({ I, homePage, authPage, createAccountPage, myAccountPage, userData }) => {
-    userData.email = Date.now() + '@test.com';
+Scenario('registration test', async ({ I, homePage, authPage, createAccountPage, myAccountPage, userData }) => {
+    userData.email = await I.getRandomEmail();
     homePage.clickSignIn();
     authPage.fillNewUserEmail(userData.email);
     authPage.clickCreateAccount();
@@ -17,6 +17,12 @@ Scenario('registration test', ({ I, homePage, authPage, createAccountPage, myAcc
 }).tag('@reg');
 
 Scenario('order test', async ({ I, userData, homePage, authPage, myAccountPage, womenShopPage, productCardPage, summaryPage }) => {
+    const pricesValues = {
+        shownPriceValue: 0, 
+        shippingPriceValue: 0, 
+        taxPriceValue: 0, 
+        totalPriceValue: 0
+    };
     homePage.clickSignIn();
     authPage.fillLoginForm(userData.email, userData.password);
     authPage.clickSignIn();
@@ -24,13 +30,13 @@ Scenario('order test', async ({ I, userData, homePage, authPage, myAccountPage, 
     homePage.clickWomenCategoryButton();
     womenShopPage.clickProductCard();
     productCardPage.checkProductCardPage();
-    const shownPriceValue = await productCardPage.getProductPrice();
+    pricesValues.shownPriceValue = await productCardPage.getProductPrice();
     productCardPage.clickAddToCart();
     productCardPage.clickProceedButton();
-    const shippingPriceValue = await summaryPage.getShippingPrice();
-    const taxPriceValue = await summaryPage.getTaxPrice();
-    const totalPriceValue = await summaryPage.getTotalPrice();
-    summaryPage.comparePrices(shownPriceValue, shippingPriceValue, taxPriceValue, totalPriceValue);
+    pricesValues.shippingPriceValue = await summaryPage.getShippingPrice();
+    pricesValues.taxPriceValue = await summaryPage.getTaxPrice();
+    pricesValues.totalPriceValue = await summaryPage.getTotalPrice();
+    summaryPage.comparePrices(pricesValues);
     summaryPage.clickProceedButton();
     summaryPage.clickSubmitButton();
     summaryPage.checkAgreeCheckbox();
@@ -43,3 +49,8 @@ Scenario('order test', async ({ I, userData, homePage, authPage, myAccountPage, 
 Data(FileHandler.getData()).Scenario('Users from data', ({ current }) => {
     console.log('Email: ' + current.email + '\nPassword: ' + current.password);
 }).tag('@account');
+
+Scenario('api', async ({ I }) => {
+    let getResponse = await I.sendGetRequest('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json');
+    console.log(getResponse.data);
+}).tag('@api');

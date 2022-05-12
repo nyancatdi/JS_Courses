@@ -13,8 +13,8 @@ type Generator = import('./helpers/generator_helper.js');
 
 declare namespace CodeceptJS {
   interface SupportObject { I: I, current: any, homePage: homePage, authPage: authPage, createAccountPage: createAccountPage, myAccountPage: myAccountPage, userData: userData, womenShopPage: womenShopPage, productCardPage: productCardPage, summaryPage: summaryPage }
-  interface Methods extends Playwright, ChaiWrapper, Generator {}
-  interface I extends ReturnType<steps_file>, WithTranslation<ChaiWrapper>, WithTranslation<Generator> {}
+  interface Methods extends Playwright, ChaiWrapper, Generator, REST, JSONResponse {}
+  interface I extends ReturnType<steps_file>, WithTranslation<ChaiWrapper>, WithTranslation<Generator>, WithTranslation<JSONResponse> {}
   namespace Translation {
     interface Actions {}
   }

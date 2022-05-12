@@ -11,7 +11,7 @@ module.exports = {
   paymentButton: { css: 'a.bankwire' },
   confirmOrderButton: { css: '#cart_navigation > button[type="submit"]' },
 
-  comparePrices(shownPriceValue, shippingPriceValue, taxPriceValue, totalPriceValue) {
+  comparePrices({ shownPriceValue, shippingPriceValue, taxPriceValue, totalPriceValue }) {
     const convertPriceToNumber = (stringValue) => +stringValue.split('$')[1];
     const shownPriceNumber = convertPriceToNumber(shownPriceValue);
     const shownShippingNumber = convertPriceToNumber(shippingPriceValue);

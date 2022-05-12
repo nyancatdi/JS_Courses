@@ -19,12 +19,19 @@ exports.config = {
       waitForTimeout: 40000,
       timeout: 40000,
     },
-    ChaiWrapper : {
+    ChaiWrapper: {
       require: "codeceptjs-chai"
     },
     Generator: {
       require: './helpers/generator_helper.js',
-    }
+    },
+    REST: {
+      defaultHeaders: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    },
+    JSONResponse: {},
   },
   include: {
     I: './steps_file.js',
